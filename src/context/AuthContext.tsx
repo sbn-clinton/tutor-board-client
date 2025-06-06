@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import api from "@/lib/axios";
 import { User } from "@/types/user";
+import axios from "axios";
 
 interface AuthContextType {
   user: User | null;
@@ -52,7 +53,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const logout = async () => {
     try {
-      const response = await api.post(
+      const response = await axios.post(
         "/auth/logout",
         {},
         { withCredentials: true }
