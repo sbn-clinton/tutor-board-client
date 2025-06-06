@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 83 100% 98%;
+    --foreground: 140 67% 5%;
+
+    --card: 83 100% 98%;
+    --card-foreground: 140 67% 5%;
+
+    --popover: 83 100% 98%;
+    --popover-foreground: 140 67% 5%;
+
+    --primary: 134 38% 31%;
+    --primary-foreground: 83 100% 98%;
+
+    --secondary: 66 91% 72%;
+    --secondary-foreground: 140 67% 5%;
+
+    --muted: 134 38% 90%;
+    --muted-foreground: 134 10% 40%;
+
+    --accent: 66 91% 72%;
+    --accent-foreground: 140 67% 5%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 83 100% 98%;
+
+    --border: 134 20% 85%;
+    --input: 134 20% 85%;
+    --ring: 134 38% 31%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 140 67% 5%;
+    --foreground: 83 100% 98%;
+
+    --card: 140 67% 8%;
+    --card-foreground: 83 100% 98%;
+
+    --popover: 140 67% 5%;
+    --popover-foreground: 83 100% 98%;
+
+    --primary: 134 38% 31%;
+    --primary-foreground: 83 100% 98%;
+
+    --secondary: 66 91% 72%;
+    --secondary-foreground: 140 67% 5%;
+
+    --muted: 134 38% 15%;
+    --muted-foreground: 134 10% 70%;
+
+    --accent: 66 91% 72%;
+    --accent-foreground: 140 67% 5%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 83 100% 98%;
+
+    --border: 134 20% 20%;
+    --input: 134 20% 20%;
+    --ring: 134 38% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom styles for the website */
+.hero-gradient {
+  background: linear-gradient(to bottom, #fdfff6, #e2f87820);
+}
+
+.btn-primary-hover {
+  @apply hover:bg-forest-green;
+}
+
+.card-hover {
+  @apply transition-all duration-300 hover:border-medium-green;
+}
+
+.accent-border {
+  @apply border-lime;
+}
+
+.testimonial-card {
+  @apply bg-off-white dark:bg-dark-green border-medium-green;
+}
