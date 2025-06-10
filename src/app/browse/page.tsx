@@ -41,7 +41,10 @@ export default function BrowseTutors() {
     const fetchTutors = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/tutor/all`
+          `${process.env.NEXT_PUBLIC_API_URL}/tutor/all`,
+          {
+            withCredentials: true,
+          }
         );
         setTutors(response.data);
       } catch (error) {

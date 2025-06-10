@@ -33,7 +33,8 @@ const tutor = () => {
           email,
           password,
           role,
-        }
+        },
+        { withCredentials: true }
       );
       const data = response.data;
       console.log(data);

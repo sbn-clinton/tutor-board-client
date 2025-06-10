@@ -17,7 +17,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useToast } from "@/components/ui/use-toast";
 import { PageTransition } from "@/components/animations/page-transition";
 import { motion } from "framer-motion";
 import Parent from "@/components/register/parent";
@@ -26,35 +25,12 @@ import { useAuth } from "@/context/AuthContext";
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
 
   const { status, user } = useAuth();
 
   if (status) {
     router.push(`/profile/${user?.role}`);
   }
-
-  const handleRegister = (e: React.FormEvent, role: string) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    // In a real app, you would send the registration data to your backend
-    // Example: axios.post('/api/auth/register', { name, email, password, role })
-
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-
-      toast({
-        title: "Registration Successful",
-        description: `Your ${role} account has been created successfully.`,
-      });
-
-      // Redirect to login page
-      router.push("/auth/login");
-    }, 1500);
-  };
 
   return (
     <PageTransition>
