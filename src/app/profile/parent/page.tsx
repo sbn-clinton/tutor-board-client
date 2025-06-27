@@ -23,6 +23,7 @@ import { motion } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import api from "@/lib/axios";
 
 export default function ParentProfile() {
   const { toast } = useToast();
@@ -56,7 +57,7 @@ export default function ParentProfile() {
     // In a real app, you would send the updated profile data to your backend
     // Example: axios.put('/api/parents/profile', formData)
     try {
-      const res = await axios.put(
+      const res = await api.put(
         `${process.env.NEXT_PUBLIC_API_URL}/parent/update-profile`,
         {
           fullName,

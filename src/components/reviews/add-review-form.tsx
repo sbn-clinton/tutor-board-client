@@ -11,6 +11,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import api from "@/lib/axios";
 
 interface AddReviewFormProps {
   tutorId: string;
@@ -54,8 +55,8 @@ export function AddReviewForm({ tutorId, tutorName }: AddReviewFormProps) {
 
     try {
       setIsSubmitting(true);
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/reviews/add-parent-review`,
+      const res = await api.post(
+        `/reviews/add-parent-review`,
         {
           rating,
           comment,

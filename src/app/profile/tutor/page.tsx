@@ -32,6 +32,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import api from "@/lib/axios";
 
 const daysOfWeek = [
   "Monday",
@@ -96,7 +97,7 @@ export default function TutorProfilePage() {
 
     try {
       setIsLoading(true);
-      const res = await axios.put(
+      const res = await api.put(
         `${process.env.NEXT_PUBLIC_API_URL}/tutor/update-profile`,
         {
           fullName,
@@ -143,7 +144,7 @@ export default function TutorProfilePage() {
 
   const addSubject = async () => {
     try {
-      const res = await axios.put(
+      const res = await api.put(
         `${process.env.NEXT_PUBLIC_API_URL}/tutor/update-subjects`,
         {
           subject: newSubject.trim(),
@@ -166,7 +167,7 @@ export default function TutorProfilePage() {
 
   const removeSubject = async (subject: string) => {
     try {
-      const res = await axios.delete(
+      const res = await api.delete(
         `${process.env.NEXT_PUBLIC_API_URL}/tutor/update-subjects/${subject}`,
         { withCredentials: true }
       );
@@ -209,7 +210,7 @@ export default function TutorProfilePage() {
         formData.append("certificates", file); // multer will look for this field
       });
 
-      const res = await axios.put(
+      const res = await api.put(
         `${process.env.NEXT_PUBLIC_API_URL}/tutor/update-certificates`,
         formData,
         {
@@ -262,7 +263,7 @@ export default function TutorProfilePage() {
 
     try {
       setIsSaving(true);
-      const res = await axios.put(
+      const res = await api.put(
         `${process.env.NEXT_PUBLIC_API_URL}/tutor/available-days`,
         { availableDays: selectedDays },
         { withCredentials: true }

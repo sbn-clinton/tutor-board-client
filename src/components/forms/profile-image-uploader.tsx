@@ -10,6 +10,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
+import api from "@/lib/axios";
 
 interface ProfileImageUploaderProps {
   currentImage?: string;
@@ -70,11 +71,9 @@ export function ProfileImageUploader({
     formData.append("profileImage", file);
 
     try {
-      const res = await axios.put(
-        `${process.env.NEXT_PUBLIC_API_URL}/${path}/update-picture`,
-        formData,
-        { withCredentials: true }
-      );
+      const res = await api.put(`/${path}/update-picture`, formData, {
+        withCredentials: true,
+      });
       if (res.status === 200) {
         onImageSelected(file);
         setIsUploading(false);
@@ -108,8 +107,8 @@ export function ProfileImageUploader({
 
   useEffect(() => {
     if (currentImage) {
-      const imageUrl = `${process.env.NEXT_PUBLIC_API_URL}/${path}/profile-image/${currentImage}`;
-      setImageUrl(imageUrl);
+      const newImageUrl = `${process.env.NEXT_PUBLIC_API_URL}/${path}/profile-image/${currentImage}`;
+      setImageUrl(newImageUrl);
     }
   }, [currentImage]);
 
@@ -124,7 +123,7 @@ export function ProfileImageUploader({
         >
           {displayImage ? (
             <Image
-              src={displayImage || "/placeholder.svg"}
+              src={displayImage} // Use displayImage instead of reconstructing the URL
               alt={name}
               fill
               className="object-cover"

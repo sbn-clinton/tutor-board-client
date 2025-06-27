@@ -7,6 +7,7 @@ import { Textarea } from "../ui/textarea";
 import { toast } from "../ui/use-toast";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
+import api from "@/lib/axios";
 
 interface ExperienceFormProps {
   setIsAddingExperience: (isAddingExperience: boolean) => void;
@@ -34,7 +35,7 @@ const AddExperienceForm = ({ setIsAddingExperience }: ExperienceFormProps) => {
     setIsLoading(true);
 
     try {
-      const res = await axios.put(
+      const res = await api.put(
         `${process.env.NEXT_PUBLIC_API_URL}/tutor/update-work-experiences`,
         { role, schoolName, period, description },
         { withCredentials: true }

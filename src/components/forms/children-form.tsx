@@ -23,6 +23,7 @@ import axios from "axios";
 import AddChildForm from "../children/AddChildForm";
 import EditChildForm from "../children/EditChildForm";
 import { useAuth } from "@/context/AuthContext";
+import api from "@/lib/axios";
 
 interface ChildrenFormProps {
   children: Child[] | [];
@@ -49,7 +50,7 @@ export function ChildrenForm({
     onChildrenUpdate(updatedChildren);
 
     try {
-      const res = await axios.delete(
+      const res = await api.delete(
         `${process.env.NEXT_PUBLIC_API_URL}/parent/delete-child/${childId}`,
         { withCredentials: true }
       );

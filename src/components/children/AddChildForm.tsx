@@ -19,6 +19,7 @@ import { toast } from "../ui/use-toast";
 import { set } from "date-fns";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
+import api from "@/lib/axios";
 
 interface ChildFormProps {
   setIsAddingChild: (isAddingChild: boolean) => void;
@@ -90,7 +91,7 @@ const AddChildForm = ({ setIsAddingChild }: ChildFormProps) => {
 
     try {
       setIsLoading(true);
-      const res = await axios.put(
+      const res = await api.put(
         `${process.env.NEXT_PUBLIC_API_URL}/parent/update-children`,
         { name, age, grade, school, subjects },
         { withCredentials: true }

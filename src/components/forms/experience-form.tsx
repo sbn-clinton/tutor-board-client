@@ -12,6 +12,7 @@ import { WorkExperience } from "@/types/user";
 import AddExperienceForm from "../experience/AddExperienceForm";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
+import api from "@/lib/axios";
 
 interface ExperienceFormProps {
   workExperiences: WorkExperience[];
@@ -25,7 +26,7 @@ export function ExperienceForm({ workExperiences }: ExperienceFormProps) {
 
   const deleteExperience = async (experienceId: string) => {
     try {
-      const res = await axios.delete(
+      const res = await api.delete(
         `${process.env.NEXT_PUBLIC_API_URL}/tutor/update-work-experiences/${experienceId}`,
         { withCredentials: true }
       );

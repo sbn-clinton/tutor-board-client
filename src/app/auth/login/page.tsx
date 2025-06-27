@@ -49,10 +49,13 @@ export default function LoginPage() {
         },
         { withCredentials: true }
       );
-      const userData = response.data.user; // ✅ adjust based on your backend
-      setUser(userData); // ✅ store user globally
+      const { token, user } = response.data;
 
-      console.log(userData);
+      // Store JWT securely
+      localStorage.setItem("token", token);
+
+      // Save user
+      setUser(user);
       if (response.status === 200) {
         toast({
           title: "Login Successful",

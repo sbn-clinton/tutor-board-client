@@ -53,13 +53,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const logout = async () => {
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/logout`,
+      const response = await api.post(
+        `/auth/logout`,
         {},
         { withCredentials: true }
       );
 
       if (response.status === 200) {
+        localStorage.removeItem("token");
         clearStorage();
         router.push("/auth/login");
       }
@@ -69,18 +70,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    const storedUserId =
-      localStorage.getItem(USER_ID_KEY) ||
-      sessionStorage.getItem(USER_ID_KEY) ||
-      Cookies.get(USER_ID_KEY);
-
+    const token = localStorage.getItem("token");
     const expiresAt = parseInt(localStorage.getItem(EXPIRATION_KEY) || "0");
 
-    if (storedUserId && Date.now() < expiresAt) {
+    if (token && Date.now() < expiresAt) {
       api
-        .get(`/auth/user/${storedUserId}`)
+        .get("/auth/me") // don't need userId if backend decodes token
         .then((res) => {
-          setUserState(res.data);
+          setUserState(res.data.user); // or just res.data depending on API
           setStatus(true);
         })
         .catch((err) => {
